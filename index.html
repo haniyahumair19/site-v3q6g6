@@ -1,0 +1,314 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="theme-color" content="#170f18">
+<title>The Wand & Whisk Café</title>
+<style>
+  :root{
+    --ink:#211420;
+    --plum:#321b32;
+    --wine:#6e2946;
+    --gold:#d9ad55;
+    --cream:#f6ecd6;
+    --parchment:#e8d6b7;
+    --mist:#cfc2cd;
+    --green:#314234;
+  }
+  *{box-sizing:border-box}
+  html{scroll-behavior:smooth}
+  body{
+    margin:0;background:var(--ink);color:var(--cream);
+    font-family:Georgia,"Times New Roman",serif;overflow-x:hidden;
+  }
+  body:before{
+    content:"";position:fixed;inset:0;z-index:-2;opacity:.42;
+    background:
+      radial-gradient(circle at 14% 6%,rgba(231,194,111,.13),transparent 20%),
+      radial-gradient(circle at 91% 18%,rgba(112,42,78,.3),transparent 26%),
+      linear-gradient(118deg,#170f18 5%,#291827 48%,#160f17 100%);
+  }
+  body:after{
+    content:"";position:fixed;inset:0;z-index:-1;opacity:.16;pointer-events:none;
+    background-image:radial-gradient(#fff 0.6px,transparent .75px);
+    background-size:24px 24px;
+  }
+  a{color:inherit;text-decoration:none}
+  .shell{width:min(1160px,calc(100% - 40px));margin:auto}
+  .eyebrow{
+    margin:0 0 13px;color:var(--gold);font:700 .72rem/1.2 Arial,sans-serif;
+    letter-spacing:.2em;text-transform:uppercase;
+  }
+  h1,h2,h3,p{margin-top:0}
+  .site-header{
+    position:absolute;top:0;width:100%;z-index:10;padding:25px 0;
+  }
+  .nav{display:flex;align-items:center;justify-content:space-between;gap:22px}
+  .brand{display:flex;align-items:center;gap:11px;color:var(--gold)}
+  .brand-mark{
+    width:39px;height:39px;border:1px solid var(--gold);border-radius:50%;
+    display:grid;place-items:center;font-size:21px;box-shadow:0 0 16px rgba(217,173,85,.25)
+  }
+  .brand-text{font-size:1.08rem;letter-spacing:.07em;text-transform:uppercase;line-height:1}
+  .brand-text small{display:block;font:700 .55rem Arial,sans-serif;letter-spacing:.22em;margin-top:4px;text-align:center}
+  .nav-links{display:flex;align-items:center;gap:29px;font:700 .73rem Arial,sans-serif;text-transform:uppercase;letter-spacing:.14em}
+  .nav-links a{opacity:.86;transition:.2s}
+  .nav-links a:hover{color:var(--gold);opacity:1}
+  .reserve{
+    border:1px solid var(--gold);padding:12px 17px;color:var(--gold)!important;
+    opacity:1!important;transition:.25s!important
+  }
+  .reserve:hover{background:var(--gold);color:var(--ink)!important}
+  .menu-toggle{display:none;background:none;border:1px solid var(--gold);color:var(--gold);font-size:21px;padding:5px 10px}
+  .hero{
+    min-height:760px;display:flex;align-items:center;position:relative;overflow:hidden;
+    border-bottom:1px solid rgba(217,173,85,.24);
+  }
+  .hero .shell{padding:154px 0 90px}
+  .hero-copy{width:min(670px,100%);position:relative;z-index:2}
+  .hero h1{
+    margin-bottom:20px;font-size:clamp(3.5rem,8.2vw,7.3rem);font-weight:400;line-height:.86;
+    letter-spacing:-.055em;text-shadow:0 3px 14px #120a12;
+  }
+  .hero h1 em{display:block;color:var(--gold);font-style:italic;font-size:.66em;letter-spacing:-.04em;margin-left:.12em}
+  .hero-description{max-width:510px;font-size:1.14rem;line-height:1.72;color:#e5d9cd;margin-bottom:31px}
+  .buttons{display:flex;gap:14px;flex-wrap:wrap}
+  .btn{
+    display:inline-flex;align-items:center;justify-content:center;min-height:48px;padding:0 23px;
+    font:700 .74rem Arial,sans-serif;letter-spacing:.14em;text-transform:uppercase;transition:.25s
+  }
+  .btn-gold{background:var(--gold);color:#241621;border:1px solid var(--gold)}
+  .btn-gold:hover{background:#f0ca78;transform:translateY(-2px)}
+  .btn-ghost{border:1px solid rgba(246,236,214,.65);color:var(--cream)}
+  .btn-ghost:hover{background:rgba(255,255,255,.09)}
+  .hero-art{position:absolute;inset:0 0 0 46%;pointer-events:none}
+  .moon{
+    position:absolute;right:10%;top:15%;width:280px;height:280px;border-radius:50%;
+    background:radial-gradient(circle at 34% 29%,#fff2c9 0 3%,#e0c781 4% 24%,#bc9455 45%,#775046 71%,#281928 73%);
+    box-shadow:0 0 60px rgba(231,192,113,.25);opacity:.8
+  }
+  .castle{position:absolute;bottom:0;right:0;width:min(710px,70vw);height:470px;opacity:.94}
+  .castle .hill{position:absolute;bottom:-78px;right:-100px;width:800px;height:260px;border-radius:52% 0 0 0;background:#100e16;transform:rotate(-2deg)}
+  .tower{position:absolute;bottom:116px;background:linear-gradient(90deg,#16111c,#3e2935 53%,#17111b);border:1px solid rgba(247,222,164,.12)}
+  .tower:before{content:"";position:absolute;left:-12px;top:-64px;border-left:32px solid transparent;border-right:32px solid transparent;border-bottom:66px solid #211625}
+  .tower:after{content:"";position:absolute;left:18px;top:43px;width:7px;height:13px;background:#e9bd61;box-shadow:0 42px #e9bd61,0 84px #e9bd61}
+  .t1{right:215px;width:62px;height:265px}.t2{right:112px;width:80px;height:190px}.t2:before{left:-10px;border-left-width:40px;border-right-width:40px}.t3{right:18px;width:44px;height:130px}.t3:before{left:-15px}
+  .bridge{position:absolute;right:0;bottom:112px;width:300px;height:65px;border-top:9px solid #30202d;border-radius:50% 0 0 0;transform:rotate(-8deg)}
+  .sparks span{position:absolute;width:4px;height:4px;border-radius:50%;background:#f7d881;box-shadow:0 0 8px 2px #f7d881;animation:float 3s ease-in-out infinite}
+  .sparks span:nth-child(1){top:29%;right:38%}.sparks span:nth-child(2){top:39%;right:12%;animation-delay:-1s}.sparks span:nth-child(3){top:57%;right:34%;animation-delay:-2s}.sparks span:nth-child(4){top:18%;right:29%;animation-delay:-.5s}.sparks span:nth-child(5){top:48%;right:49%;animation-delay:-1.5s}
+  @keyframes float{50%{transform:translateY(-15px);opacity:.3}}
+  .scroll-note{position:absolute;bottom:25px;left:50%;transform:translateX(-50%);font:700 .62rem Arial,sans-serif;letter-spacing:.2em;text-transform:uppercase;color:var(--gold);white-space:nowrap}
+  .scroll-note:after{content:"";display:block;width:1px;height:25px;background:var(--gold);margin:10px auto 0}
+  .welcome{padding:108px 0;background:linear-gradient(110deg,#ead9b9,#f7ead0 62%,#e0cba9);color:var(--ink)}
+  .welcome-grid{display:grid;grid-template-columns:1fr 1.05fr;gap:90px;align-items:center}
+  .welcome h2,.menu-section h2,.visit h2{font-size:clamp(2.45rem,4vw,4.25rem);font-weight:400;line-height:.98;letter-spacing:-.045em;margin-bottom:22px}
+  .welcome .eyebrow{color:var(--wine)}
+  .welcome p{font-size:1.08rem;line-height:1.75;color:#4c3740}
+  .quote-card{
+    min-height:355px;position:relative;padding:43px 39px;display:flex;flex-direction:column;justify-content:end;
+    color:var(--cream);background:linear-gradient(135deg,rgba(40,22,37,.74),rgba(87,36,61,.82)),#44243d;
+    box-shadow:16px 16px 0 rgba(116,71,57,.17);overflow:hidden
+  }
+  .quote-card:before{content:"☾";position:absolute;right:20px;top:-60px;font-size:250px;color:rgba(217,173,85,.16)}
+  .quote-card blockquote{font-size:1.65rem;line-height:1.32;font-style:italic;margin:0;position:relative}
+  .quote-card cite{margin-top:17px;color:var(--gold);font:700 .68rem Arial,sans-serif;letter-spacing:.16em;text-transform:uppercase;font-style:normal}
+  .menu-section{padding:112px 0 118px}
+  .section-top{display:flex;justify-content:space-between;align-items:end;gap:30px;margin-bottom:43px}
+  .section-top h2{margin-bottom:0}.section-top .eyebrow{margin-bottom:10px}
+  .menu-note{color:#cbbbc4;max-width:305px;font-size:.97rem;line-height:1.6}
+  .menu-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:18px}
+  .menu-card{min-height:335px;padding:28px;background:rgba(255,255,255,.035);border:1px solid rgba(217,173,85,.27);position:relative;overflow:hidden;transition:.3s}
+  .menu-card:hover{transform:translateY(-7px);border-color:var(--gold);background:rgba(255,255,255,.07)}
+  .menu-icon{height:102px;display:grid;place-items:center;font-size:67px;filter:drop-shadow(0 7px 8px rgba(0,0,0,.35))}
+  .menu-card h3{font-size:1.55rem;font-weight:400;margin:14px 0 8px;color:var(--gold)}
+  .menu-card p{color:#d4c7ce;font-size:.96rem;line-height:1.58;margin-bottom:16px}
+  .price{font:700 .76rem Arial,sans-serif;letter-spacing:.15em;color:var(--cream)}
+  .feature{padding:95px 0;background:var(--green);position:relative;overflow:hidden}
+  .feature:before{content:"";position:absolute;width:500px;height:500px;border-radius:50%;left:-160px;top:-270px;border:1px solid rgba(217,173,85,.25)}
+  .feature-grid{display:grid;grid-template-columns:1.1fr .9fr;align-items:center;gap:70px;position:relative}
+  .feature h2{font-size:clamp(2.5rem,4vw,4.4rem);font-weight:400;line-height:.98;letter-spacing:-.045em;margin-bottom:20px}
+  .feature p{color:#d9d2c3;line-height:1.72;font-size:1.08rem;max-width:570px}
+  .hours{border-left:1px solid var(--gold);padding:22px 0 22px 32px}
+  .hours h3{color:var(--gold);font-size:1.5rem;font-weight:400;margin-bottom:18px}
+  .hours-row{display:flex;justify-content:space-between;gap:20px;border-bottom:1px solid rgba(246,236,214,.18);padding:11px 0;color:#e7ddcc;font-size:.98rem}
+  .visit{padding:106px 0;background:#ede0c5;color:var(--ink)}
+  .visit .eyebrow{color:var(--wine)}
+  .visit-grid{display:grid;grid-template-columns:1fr 1fr;gap:80px}
+  .visit p{font-size:1.08rem;color:#503941;line-height:1.7;max-width:500px}
+  .contact-list{list-style:none;padding:0;margin:30px 0 0}
+  .contact-list li{padding:12px 0;border-bottom:1px solid #c9af8c;font-size:1rem}
+  .contact-list strong{display:inline-block;width:86px;color:var(--wine);font:700 .69rem Arial,sans-serif;letter-spacing:.12em;text-transform:uppercase}
+  .map-card{background:#312136;min-height:310px;padding:23px;position:relative;overflow:hidden;color:var(--cream)}
+  .map-card:before,.map-card:after{content:"";position:absolute;background:rgba(217,173,85,.16);transform:rotate(-35deg)}
+  .map-card:before{width:500px;height:20px;left:-100px;top:135px}.map-card:after{width:360px;height:12px;right:-80px;top:74px}
+  .map-lines{position:absolute;inset:0;background:repeating-linear-gradient(65deg,transparent 0 42px,rgba(217,173,85,.12) 43px 45px,transparent 46px 85px)}
+  .pin{position:absolute;left:49%;top:43%;width:38px;height:38px;background:var(--gold);border-radius:50% 50% 50% 0;transform:rotate(-45deg);box-shadow:0 5px 18px #120c12}
+  .pin:after{content:"";position:absolute;width:13px;height:13px;border-radius:50%;background:#4d2940;left:12px;top:12px}
+  .map-label{position:absolute;left:24px;bottom:23px;z-index:1}
+  .map-label strong{display:block;font-size:1.4rem;font-weight:400;color:var(--gold);margin-bottom:6px}
+  .map-label span{font:700 .67rem Arial,sans-serif;letter-spacing:.13em;text-transform:uppercase}
+  footer{padding:31px 0;background:#140d15;color:#b9aab1}
+  .footer-row{display:flex;justify-content:space-between;gap:20px;align-items:center;font-size:.8rem}
+  .footer-row strong{color:var(--gold);letter-spacing:.09em}
+  @media(max-width:760px){
+    .site-header{padding:18px 0}.nav-links{display:none}.menu-toggle{display:block}
+    .nav-links.open{display:flex;position:absolute;right:0;top:54px;width:210px;padding:18px;background:#281827;border:1px solid var(--gold);flex-direction:column;align-items:stretch;gap:18px}
+    .hero{min-height:720px}.hero .shell{padding-top:135px}.hero-art{left:0;opacity:.44}.moon{right:-48px;top:20%;width:215px;height:215px}.castle{width:560px;right:-155px}
+    .hero-copy{width:100%}.hero h1{font-size:clamp(3.55rem,16vw,5.2rem)}.scroll-note{display:none}
+    .welcome-grid,.feature-grid,.visit-grid{grid-template-columns:1fr;gap:42px}.welcome{padding:76px 0}.quote-card{min-height:280px}
+    .menu-section{padding:76px 0}.section-top{display:block}.menu-note{margin-top:18px}.menu-grid{grid-template-columns:1fr;gap:14px}.menu-card{min-height:250px}
+    .feature,.visit{padding:75px 0}.visit-grid{gap:35px}.map-card{min-height:265px}
+    .footer-row{flex-direction:column;text-align:center}.brand-text{font-size:.94rem}
+  }
+</style>
+</head>
+<body>
+<header class="site-header">
+  <div class="shell nav">
+    <a class="brand" href="#top" aria-label="The Wand and Whisk Café home">
+      <span class="brand-mark" aria-hidden="true">✦</span>
+      <span class="brand-text">Wand &amp; Whisk<small>Wizarding Café</small></span>
+    </a>
+    <button class="menu-toggle" aria-label="Toggle navigation" aria-expanded="false">☰</button>
+    <nav class="nav-links" aria-label="Primary navigation">
+      <a href="#menu">Menu</a>
+      <a href="#story">Our Story</a>
+      <a href="#visit">Find Us</a>
+      <a class="reserve" href="#visit">Book a Table</a>
+    </nav>
+  </div>
+</header>
+
+<main id="top">
+  <section class="hero" aria-label="The Wand and Whisk Café">
+    <div class="hero-art" aria-hidden="true">
+      <div class="moon"></div>
+      <div class="castle">
+        <div class="hill"></div><div class="bridge"></div>
+        <div class="tower t1"></div><div class="tower t2"></div><div class="tower t3"></div>
+      </div>
+      <div class="sparks"><span></span><span></span><span></span><span></span><span></span></div>
+    </div>
+    <div class="shell">
+      <div class="hero-copy">
+        <p class="eyebrow">Platform 9¾ · Diagon Alley Inspired</p>
+        <h1>A little magic<br><em>in every cup.</em></h1>
+        <p class="hero-description">Step away from the Muggle world for enchanted brews, spellbinding sweets, and a warmly bewitched table waiting just for you.</p>
+        <div class="buttons">
+          <a href="#menu" class="btn btn-gold">Explore the Menu</a>
+          <a href="#visit" class="btn btn-ghost">Reserve Your Seat</a>
+        </div>
+      </div>
+    </div>
+    <div class="scroll-note">Discover the magic</div>
+  </section>
+
+  <section class="welcome" id="story">
+    <div class="shell welcome-grid">
+      <div>
+        <p class="eyebrow">A proper wizarding welcome</p>
+        <h2>More than a café.<br>A hidden corner of magic.</h2>
+        <p>Tucked behind an unassuming brick wall, Wand &amp; Whisk is made for long conversations, secret studies, and the simple joy of a perfectly brewed potion.</p>
+        <p>Our kitchen charms familiar ingredients into comforting, curious things — from butterbeer lattes to treacle tarts served warm from the oven.</p>
+      </div>
+      <div class="quote-card">
+        <blockquote>“Happiness can be found, even in the darkest of times, if one only remembers to turn on the light.”</blockquote>
+        <cite>— Albus Dumbledore</cite>
+      </div>
+    </div>
+  </section>
+
+  <section class="menu-section" id="menu">
+    <div class="shell">
+      <div class="section-top">
+        <div>
+          <p class="eyebrow">From our enchanted kitchen</p>
+          <h2>Choose your potion.</h2>
+        </div>
+        <p class="menu-note">All recipes are prepared fresh daily with a dash of house magic and plenty of care.</p>
+      </div>
+      <div class="menu-grid">
+        <article class="menu-card">
+          <div class="menu-icon" aria-hidden="true">☕</div>
+          <h3>Butterbrew Latte</h3>
+          <p>Espresso, steamed milk, caramelized butterscotch, and a cloud of cinnamon cream.</p>
+          <span class="price">6 GALLEONS</span>
+        </article>
+        <article class="menu-card">
+          <div class="menu-icon" aria-hidden="true">🫖</div>
+          <h3>Mooncalf Chai</h3>
+          <p>A fragrant black tea steeped with cardamom, ginger, vanilla, and a touch of starlight.</p>
+          <span class="price">5 GALLEONS</span>
+        </article>
+        <article class="menu-card">
+          <div class="menu-icon" aria-hidden="true">🥧</div>
+          <h3>Treacle Tart</h3>
+          <p>Golden syrup, lemon zest, and buttery pastry, baked to a spellbinding finish.</p>
+          <span class="price">7 GALLEONS</span>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <section class="feature">
+    <div class="shell feature-grid">
+      <div>
+        <p class="eyebrow">Evenings at the café</p>
+        <h2>The candles are lit.<br>Your table awaits.</h2>
+        <p>When daylight fades, our café becomes a gathering place for wizarding quizzes, book-club meetings, and candlelit cups shared beneath an enchanted ceiling. Cloaks welcome. Owls, by arrangement.</p>
+        <a href="#visit" class="btn btn-gold" style="margin-top:12px">Plan Your Visit</a>
+      </div>
+      <div class="hours">
+        <h3>Opening Hours</h3>
+        <div class="hours-row"><span>Monday – Thursday</span><strong>8am – 9pm</strong></div>
+        <div class="hours-row"><span>Friday</span><strong>8am – 10pm</strong></div>
+        <div class="hours-row"><span>Saturday</span><strong>9am – 10pm</strong></div>
+        <div class="hours-row"><span>Sunday</span><strong>9am – 7pm</strong></div>
+      </div>
+    </div>
+  </section>
+
+  <section class="visit" id="visit">
+    <div class="shell visit-grid">
+      <div>
+        <p class="eyebrow">Find the hidden door</p>
+        <h2>Come in,<br>the cauldron’s on.</h2>
+        <p>We are nestled just off the high street, between the old bookshop and the black iron gate. Follow the golden lanterns — they know the way.</p>
+        <ul class="contact-list">
+          <li><strong>Address</strong> 9 Lantern Lane, London</li>
+          <li><strong>Owl Post</strong> hello@wandandwhisk.cafe</li>
+          <li><strong>Telephone</strong> +44 20 3940 1997</li>
+        </ul>
+      </div>
+      <div class="map-card" role="img" aria-label="Illustrated map showing The Wand and Whisk Café on Lantern Lane">
+        <div class="map-lines"></div><div class="pin"></div>
+        <div class="map-label"><strong>Wand &amp; Whisk</strong><span>9 Lantern Lane · London</span></div>
+      </div>
+    </div>
+  </section>
+</main>
+
+<footer>
+  <div class="shell footer-row">
+    <span>© 2024 <strong>Wand &amp; Whisk Café</strong> · Made with a pinch of magic.</span>
+    <span>A fan-inspired wizarding experience · Not affiliated with any official franchise.</span>
+  </div>
+</footer>
+
+<script>
+  const toggle = document.querySelector('.menu-toggle');
+  const nav = document.querySelector('.nav-links');
+  toggle.addEventListener('click', () => {
+    const open = nav.classList.toggle('open');
+    toggle.setAttribute('aria-expanded', open);
+    toggle.textContent = open ? '×' : '☰';
+  });
+  document.querySelectorAll('.nav-links a').forEach(link => link.addEventListener('click', () => {
+    nav.classList.remove('open');
+    toggle.setAttribute('aria-expanded', 'false');
+    toggle.textContent = '☰';
+  }));
+</script>
+</body>
+</html>
